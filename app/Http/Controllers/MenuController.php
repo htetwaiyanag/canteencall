@@ -12,9 +12,33 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $menus = Menu::all();
+        if($request->search){
+
+            $search = $request->search;
+
+            $menus = Menu::where('food_name','LIKE',"%{$search}%")->paginate(10);
+            return view('menu/index')->with('menus',$menus);
+        }
+        if($request->orderBy){
+
+            $orderBy = $request->orderBy;
+
+            if($orderBy==='order_count'){
+
+                $orderType = 'desc';
+            }
+            else{
+
+                $orderType = 'asc';
+            }
+        }
+        else{
+            $orderBy = 'food_name';
+            $orderType = 'asc';
+        }
+        $menus = Menu::orderBy($orderBy,$orderType)->paginate(10);
         return view('menu/index')->with('menus',$menus);
     }
 
@@ -53,6 +77,24 @@ class MenuController extends Controller
         $menu->optional_taste = $request->input('optional_taste');
         $menu->waiting_time = $request->input('waiting_time');
         $menu->delivery_fees = $request->input('delivery_fees');
+
+        if($request->hasfile('image')){
+
+            $file = $request->file('image');
+
+            $extension = $file->getClientOriginalExtension();
+
+            $filename = time().'.'.$extension;
+
+            $file->move('uploads/menu/',$filename);
+
+            $menu->image = $filename;
+
+        }else{
+
+            $menu->image = '';
+        }
+
         $menu->save();
 
         return redirect()->back()->with('success','New menu is added');
@@ -66,7 +108,9 @@ class MenuController extends Controller
      */
     public function show($id)
     {
-        //
+        $menu = Menu::findOrFail($id);
+
+        return view('menu/show')->with('menu',$menu);
     }
 
     /**
@@ -77,7 +121,9 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $menu = Menu::findOrFail($id);
+
+        return view('menu/edit')->with('menu',$menu);
     }
 
     /**
@@ -89,7 +135,44 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'food_name' => 'required',
+            'price' => 'required',
+            'category' => 'required',
+            'optional_taste' => 'required',
+            'waiting_time' => 'required',
+            'delivery_fees' => 'required',
+        ]);
+
+        $menu = Menu::findOrFail($id);
+
+        $menu->food_name = $request->input('food_name');
+        $menu->price = $request->input('price');
+        $menu->category = $request->input('category');
+        $menu->optional_taste = $request->input('optional_taste');
+        $menu->waiting_time = $request->input('waiting_time');
+        $menu->delivery_fees = $request->input('delivery_fees');
+
+        if($request->hasfile('image')){
+
+            $file = $request->file('image');
+
+            $extension = $file->getClientOriginalExtension();
+
+            $filename = time().'.'.$extension;
+
+            $file->move('uploads/menu/',$filename);
+
+            $menu->image = $filename;
+
+        }else{
+
+            $menu->image = '';
+        }
+
+        $menu->save();
+
+        return view('menu/show')->with('success','Menu is updated')->with('menu',$menu);
     }
 
     /**
@@ -100,6 +183,9 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $menu = Menu::findOrFail($id);
+        $menu->delete();
+
+        return redirect()->action('MenuController@index');
     }
 }

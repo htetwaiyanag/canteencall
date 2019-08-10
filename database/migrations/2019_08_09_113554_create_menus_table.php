@@ -21,6 +21,8 @@ class CreateMenusTable extends Migration
             $table->string('optional_taste');
             $table->string('waiting_time');
             $table->string('delivery_fees');
+            $table->mediumText('image')->nullable();
+            $table->integer('order_count')->nullable();
             $table->timestamps();
         });
     }

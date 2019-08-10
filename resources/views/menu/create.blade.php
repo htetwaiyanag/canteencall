@@ -18,7 +18,7 @@
 
           <h2>Add New Menu</h2>  
 
-            <form action="{{ route('menu.store') }}" method="POST">
+            <form action="{{ route('menu.store') }}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="form-group">
                   <label>Food Name</label>
@@ -57,6 +57,11 @@
               <div class="form-group">
                   <label>Delivery Fees</label>
                   <input type="text" name="delivery_fees" class="form-control" placeholder="100ks or free" value="{{ old('delivery_fees') }}" required>
+              </div>
+
+              <div class="form-group">
+                <label>Upload Image</label>
+                <input type="file" class="form-control-file" name="image">
               </div>
 
               <div class="form-group">

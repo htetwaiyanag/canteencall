@@ -14,6 +14,7 @@ class MenuController extends Controller
      */
     public function index(Request $request)
     {
+        $userId = auth()->user()->id;
         if($request->search){
 
             $search = $request->search;
@@ -38,7 +39,7 @@ class MenuController extends Controller
             $orderBy = 'food_name';
             $orderType = 'asc';
         }
-        $menus = Menu::orderBy($orderBy,$orderType)->paginate(10);
+        $menus = Menu::where('user_id','=',$userId)->orderBy($orderBy,$orderType)->paginate(10);
         return view('menu/index')->with('menus',$menus);
     }
 
@@ -77,6 +78,7 @@ class MenuController extends Controller
         $menu->optional_taste = $request->input('optional_taste');
         $menu->waiting_time = $request->input('waiting_time');
         $menu->delivery_fees = $request->input('delivery_fees');
+        $menu->user_id = auth()->user()->id;
 
         if($request->hasfile('image')){
 

@@ -90,7 +90,7 @@
                   <div class="sidebar">
                     <div class="navbar-nav">
                       <li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-columns icon"></i><span class="text">Dashboard</span></a></li>
-                      <li class="nav-item"><a href="#" class="nav-link"><i class="far fa-edit icon"></i><span class="text">Orders</span></a></li>
+                      <li class="nav-item"><a href="{{ route('order.index') }}" class="nav-link"><i class="far fa-edit icon"></i><span class="text">Orders</span></a></li>
                       <li class="nav-item"><a href="{{ route('menu.index') }}" class="nav-link"><i class="fas fa-utensils icon"></i><span class="text">Menu</span></a></li>
                       <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-coins icon"></i><span class="text">Sales</span></a></li>
                       <li class="nav-item"><a href="#" class="nav-link"><i class="far fa-comment icon"></i><span class="text">Review</span></a></li>

@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@home');
 
 Auth::routes();
 
@@ -21,4 +19,18 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('menu', 'MenuController');
 
+Route::resource('order', 'OrderController');
+
+Route::get('/order/addCart/{id}','OrderController@addCart');
+
 Route::get('/dashboard','DashboardController@index')->name('dashboard');
+
+Route::get('/search/c','SearchController@searchCanteen');
+
+Route::get('/search/f/{id}','SearchController@searchMenu');
+
+Route::resource('/cart', 'CartController');
+
+Route::get('/cart/view/{id}','CartController@viewIndex');
+
+

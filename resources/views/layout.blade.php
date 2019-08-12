@@ -16,6 +16,7 @@
   crossorigin="anonymous"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/style.js') }}"></script>
+    {{-- <script src="{{ asset('js/store.js') }}" async></script> --}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -52,7 +53,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @guest
+                        {{-- @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
@@ -79,7 +80,7 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest
+                        @endguest --}}
                     </ul>
                 </div>
             </div>

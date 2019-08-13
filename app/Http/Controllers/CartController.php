@@ -53,6 +53,7 @@ class CartController extends Controller
         $order->room_no = $request->input('room_no');
         $order->time = $request->input('time');
         $order->remark = $request->input('remark');
+        $order->status = 'making';
         $order->user_id = $request->input('user_id');
         $order->order_data = json_encode($items);
 

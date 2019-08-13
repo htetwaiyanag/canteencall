@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Menu;
 use App\Order;
 use App\User;
+use Session;
 
 class OrderController extends Controller
 {
@@ -18,9 +19,25 @@ class OrderController extends Controller
     {
         $id = auth()->user()->id;
 
-        $user = User::findOrFail($id);
+        $orders = Order::where('user_id',$id)->where('status','making')->get();
 
-        return view('order.index')->with('orders',$user->orders);
+        if(count($orders)>0){
+
+            foreach($orders as $order){
+                $orderData[] = json_decode($order->order_data);
+            }
+
+            // dd($orderData);
+
+            return view('order.index')->with('orders',$orders)->with('orderData',$orderData);
+
+        }else{
+
+            Session::flash('message', 'This is no order yet!'); 
+
+            return view('order.index');
+        }
+
     }
 
     /**
@@ -99,7 +116,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -111,7 +128,11 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Order::where('id',$id)->update(['status'=>'delivered']);
+
+        Session::flash('message', 'Order is being delivered'); 
+
+        return back();
     }
 
     /**

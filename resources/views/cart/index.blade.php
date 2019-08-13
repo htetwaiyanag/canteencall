@@ -31,7 +31,7 @@
                   <td width="200px">{{ $cart->name }}</td>
                   <td width="200px">{{ $cart->price }}</td>
                   <td width="50px">
-                    <form action="cart/{{ $cart->id }}" method="POST">
+                    <form action="/cart/{{ $cart->id }}" method="POST">
                       @method('PUT')
                       @csrf
                       <input type="number" name="quantity" value="{{ $cart->quantity }}" class="form-control">
@@ -39,7 +39,7 @@
                     </form>
                   </td>
                   <td width="100px">
-                    <form action="cart/{{ $cart->id }}" method="POST">
+                    <form action="/cart/{{ $cart->id }}" method="POST">
                       @method('PUT')
                       @csrf
                       <input type="text" name="meal" value="{{ $cart->attributes->has('meal')? $cart->attributes->meal:'' }}" class="form-control">

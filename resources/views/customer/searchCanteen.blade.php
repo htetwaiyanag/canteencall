@@ -8,6 +8,8 @@
 
     <div class="col-md-6">
 
+      <a href="/">back</a>
+
       @if (count($canteens)>0)
     
       @foreach ($canteens as $canteen)

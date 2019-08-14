@@ -88,7 +88,7 @@
               <textarea name="remark" cols="30" rows="5" class="form-control"></textarea>
             </div>
 
-            <input type="text" value="{{ $canteenId }}" name="user_id">
+            <input type="hidden" value="{{ $canteenId }}" name="user_id">
 
             <input type="submit" value="Checkout" class="btn btn-primary">
 

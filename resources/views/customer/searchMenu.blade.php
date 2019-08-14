@@ -16,23 +16,33 @@
         Phone : {{ $user->owner_phone }}
 
         <ul>
-          @foreach ($menus as $menu)
 
-          <li>
+          @if (count($menus)>0)
 
-            <p>{{ $menu->food_name }}</p>
+            @foreach ($menus as $menu)
 
-            <p>{{ $menu->price }}</p>
-  
-            <a href="/cart/{{ $menu->id }}">Add to Cart</a>
+            <li>
 
-            <img src="/uploads/menu/{{ $menu->image }}" alt="{{ $menu->image }}" width="120" height="80" align="right">
+              <p>{{ $menu->food_name }}</p>
 
-          </li>
+              <p>{{ $menu->price }}</p>
+    
+              <a href="/cart/{{ $menu->id }}">Add to Cart</a>
 
-          <hr>
+              <img src="/uploads/menu/{{ $menu->image }}" alt="{{ $menu->image }}" width="120" height="80" align="right">
+
+            </li>
+
+            <hr>
+                
+            @endforeach
               
-          @endforeach
+          @else
+
+          <div class="alert alert-info">Ther is no menu yet</div>
+              
+          @endif
+
         </ul>
 
     </div>

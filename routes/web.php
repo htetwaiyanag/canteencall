@@ -23,7 +23,7 @@ Route::resource('order', 'OrderController');
 
 Route::get('/order/addCart/{id}','OrderController@addCart');
 
-Route::get('/dashboard','DashboardController@index')->name('dashboard');
+Route::get('/dashboard','DashboardController@dashboardIndex')->name('dashboard');
 
 Route::get('/search/c','SearchController@searchCanteen');
 
@@ -32,5 +32,7 @@ Route::get('/search/f/{id}','SearchController@searchMenu');
 Route::resource('/cart', 'CartController');
 
 Route::get('/cart/view/{id}','CartController@viewIndex');
+
+Route::get('/sale','SaleController@index')->name('sale');
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Menu;
+use Session;
 
 class SearchController extends Controller
 {
@@ -20,15 +21,18 @@ class SearchController extends Controller
     {
         $user = User::findOrFail($id);
 
-        foreach($user->menus as $menu)
-        {
-            $meal = $menu->optional_taste;
+        // dd($user);
 
-            $mealArr[] = explode(',',$meal);
-        }
+        // foreach($user->menus as $menu)
+        // {
+        //     $meal = $menu->optional_taste;
+
+        //     $mealArr[] = explode(',',$meal);
+        // }
+
 
         // dd($tasteAndMealArr);
 
-        return view('customer/searchMenu')->with('menus',$user->menus)->with('user',$user)->with('mealArr',$mealArr);
+        return view('customer/searchMenu')->with('menus',$user->menus)->with('user',$user);
     }
 }

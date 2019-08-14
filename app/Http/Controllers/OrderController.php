@@ -10,6 +10,11 @@ use Session;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -64,36 +69,8 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request,[
-        //     'customer_name' => 'required',
-        //     'customer_phone' => 'required',
-        //     'room_no' => 'required',
-        //     'quantity' => 'required',
-        //     'remark' => 'required',
-        // ]);
 
         dd($request->all());
-
-        // $order = new Order;
-        // $order->customer_name = $request->input('customer_name');
-        // $order->customer_phone = $request->input('customer_phone');
-        // $order->room_no = $request->input('room_no');
-        // $order->quantity = $request->input('quantity');
-        // $order->time = $request->input('time');
-        // $order->remark = $request->input('remark');
-        // $order->menu_id = $request->input('menu_id');
-
-        // $order->save();
-
-        // $menuId = $request->input('menu_id');
-        // $quantity = $request->input('quantity');
-
-        // $menu = Menu::findOrFail($menuId);
-
-        // $totalPrice = $menu->price * $quantity;
-
-        // return view('order/success')->with('menu',$menu)->with('totalPrice',$totalPrice)->with('quantity',$quantity);
-
 
     }
 

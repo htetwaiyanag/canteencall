@@ -6,7 +6,7 @@
 
   <div class="row justify-content-center">
 
-    <div class="col-md-6">
+    <div class="col-md-8">
 
       <h1>Cart</h1>
 
@@ -18,7 +18,7 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Quantity</th>
-                <th>Meal</th>
+                <th>Option</th>
               </tr>
           
             </thead>
@@ -60,7 +60,15 @@
           
           </table>
 
-          <form action="{{ route('cart.store') }}" method="POST">
+    </div>
+
+  </div>
+
+  <div class="row justify-content-center">
+
+    <div class="col-md-6">
+
+        <form action="{{ route('cart.store') }}" method="POST">
             @csrf
 
             <div class="form-group">

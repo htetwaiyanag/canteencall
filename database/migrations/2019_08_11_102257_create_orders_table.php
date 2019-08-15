@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->string('customer_phone');
             $table->string('room_no');
             $table->string('time');
-            $table->string('remark');
+            $table->string('remark')->nullable();
             $table->text('order_data');
             $table->timestamps();
         });

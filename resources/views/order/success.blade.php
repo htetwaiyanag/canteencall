@@ -8,24 +8,24 @@
 
       <div class="col-md-8">
 
-        <h2>Receipt</h2>
-        <hr>
+        <h1>Receipt</h1>
+        <br>
         <table class="table">
           @foreach ($carts as $cart)
               <tr>
-                <td>{{ $cart->name }}</td>
+                <td>{{ $cart->name }} ({{ $cart->attributes->has('meal')?$cart->attributes->meal:'' }})</td>
                 <td>{{ $cart->quantity }}</td>
                 <td>{{ $cart->price }}</td>
               </tr>
           @endforeach
           <tr>
             <td colspan="3" align="right">
-              <b>Total : {{ Cart::getTotal() }}</b>
+              <h4>Total : {{ Cart::getTotal() }}</h4>
             </td>
           </tr>
         </table>
 
-        <a href="/">Go Back</a>
+        <a href="/" class="btn btn-custom">Go to the home page and wait the order</a>
 
       </div>
 

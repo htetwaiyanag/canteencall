@@ -21,18 +21,6 @@ class SearchController extends Controller
     {
         $user = User::findOrFail($id);
 
-        // dd($user);
-
-        // foreach($user->menus as $menu)
-        // {
-        //     $meal = $menu->optional_taste;
-
-        //     $mealArr[] = explode(',',$meal);
-        // }
-
-
-        // dd($tasteAndMealArr);
-
         return view('customer/searchMenu')->with('menus',$user->menus)->with('user',$user);
     }
 }

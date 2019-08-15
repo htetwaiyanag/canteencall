@@ -1,5 +1,23 @@
 body {
     color: gray;
+    font-family: 'Raleway', sans-serif;
+}
+
+.btn-custom {
+    background: #bb9943;
+    color: #000;
+}
+
+.black-text {
+    color: #333;
+}
+
+.gold-text {
+    color: #bb9943;
+}
+
+h1 {
+    font-family: 'Anton', sans-serif;
 }
 
 
@@ -91,3 +109,6 @@ body {
     padding-left: 20px;
     color: #343A40;
 }
+
+
+/* welcome blade */

@@ -27,12 +27,16 @@ Route::get('/dashboard','DashboardController@dashboardIndex')->name('dashboard')
 
 Route::get('/search/c','SearchController@searchCanteen');
 
-Route::get('/search/f/{id}','SearchController@searchMenu');
+Route::get('/search/f/{id}/{orderBy?}','SearchController@searchMenu');
 
 Route::resource('/cart', 'CartController');
+
+Route::post('/cart/remove/{id}','CartController@removeCartItem');
 
 Route::get('/cart/view/{id}','CartController@viewIndex');
 
 Route::get('/sale','SaleController@index')->name('sale');
+
+Route::resource('/feedback','FeedbackController');
 
 

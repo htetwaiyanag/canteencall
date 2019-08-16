@@ -58,13 +58,16 @@ class CartController extends Controller
         $order->user_id = $request->input('user_id');
         $order->order_data = json_encode($items);
 
-        // more stuff here
-
         $order->save();
 
         $carts = Cart::getContent();
 
-        return view('order.success')->with('carts',$carts);
+        $userId = $request->input('user_id');
+
+        return view('order.success')->with([
+            'carts'=>$carts,
+            'userId'=>$userId
+            ]);
     }
 
     /**
@@ -77,14 +80,13 @@ class CartController extends Controller
     {
         $menu = Menu::findOrFail($id);
 
-        // dd($menu->id);
         Cart::add([
             'id' => $menu->id,
             'name' => $menu->food_name,
             'price' => $menu->price,
             'quantity' => 1,
             'attributes' => array(
-                'meal' => 'chicken',
+                'meal' => 'option',
               )
         ]);
 
@@ -136,8 +138,10 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function removeCartItem($id)
     {
-        //
+        Cart::remove($id);
+
+        return back();
     }
 }

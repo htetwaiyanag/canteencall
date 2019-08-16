@@ -8,6 +8,7 @@
 
     <div class="col-md-8">
 
+      <a href="/search/f/{{ $canteenId }}">back</a>
       <h1>Cart</h1>
 
         <table class="table">
@@ -19,6 +20,7 @@
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Option</th>
+                <th></th>
               </tr>
           
             </thead>
@@ -44,6 +46,12 @@
                       @csrf
                       <input type="text" name="meal" value="{{ $cart->attributes->has('meal')? $cart->attributes->meal:'' }}" class="form-control">
                       <button type="submit" class="btn btn-sm"><i class="fas fa-redo-alt"></i></button>
+                    </form>
+                  </td>
+                  <td>
+                    <form action="/cart/remove/{{ $cart->id }}" method="POST">
+                      @csrf
+                      <button type="submit" class="btn btn-sm">X</button>
                     </form>
                   </td>
                 </tr>

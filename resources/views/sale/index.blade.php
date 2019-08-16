@@ -54,6 +54,8 @@
 
       </table>
 
+      {{ $sales->links() }}
+
     </div>
     
   </div>

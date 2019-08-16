@@ -15,10 +15,35 @@
             </ol>
           </nav>
 
+          <form action="/search/f/{{ $user->id }}" class="mt-5">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search menu" name="search">
+                <div class="input-group-append">
+                  <button class="btn btn-secondary" type="submit">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+              </div>
+          </form>
+          <br>
+
         <a href="/cart/view/{{ $user->id }}" class="btn btn-success float-right">Cart <span class="badge badge-light">{{ Cart::getTotalQuantity() }}</span></a><br>
 
         <h3>Menus of {{ $user->canteen_name }}</h3>
-        Phone : {{ $user->owner_phone }}
+        Phone : {{ $user->owner_phone }} <br>
+        <div class="dropdown mt-5">
+
+          <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sort By
+          </a>
+        
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/search/f/{{ $user->id }}">Alphabet</a>
+            <a class="dropdown-item" href="/search/f/{{ $user->id }}/price">Price</a>
+            <a class="dropdown-item" href="/search/f/{{ $user->id }}/order_count">Most Ordered</a>
+          </div>
+        
+        </div>
 
         <ul class="mt-5">
 

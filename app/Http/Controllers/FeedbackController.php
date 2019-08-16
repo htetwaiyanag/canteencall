@@ -3,18 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Menu;
-use App\Order;
+use App\Feedback;
 use App\User;
-use Session;
 
-class OrderController extends Controller
+class FeedbackController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
     /**
      * Display a listing of the resource.
      *
@@ -24,25 +17,9 @@ class OrderController extends Controller
     {
         $id = auth()->user()->id;
 
-        $orders = Order::where('user_id',$id)->where('status','making')->paginate(5);
+        $user = User::findOrFail($id);
 
-        if(count($orders)>0){
-
-            foreach($orders as $order){
-                $orderData[] = json_decode($order->order_data);
-            }
-
-            // dd($orderData);
-
-            return view('order.index')->with('orders',$orders)->with('orderData',$orderData);
-
-        }else{
-
-            Session::flash('message', 'This is no order yet!'); 
-
-            return view('order.index');
-        }
-
+        return view('feedback.index')->with('feedbacks',$user->feedbacks);
     }
 
     /**
@@ -50,15 +27,9 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        $menu = Menu::findOrFail($id);
-        return view('order/create')->with('menu',$menu);
-    }
-
-    public function addCart($id)
-    {
-        
+        //
     }
 
     /**
@@ -69,9 +40,15 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        $feedback = new Feedback();
 
-        dd($request->all());
+        $feedback->customer_name = $request->input('customer_name');
+        $feedback->user_id = $request->input('user_id');
+        $feedback->feedback = $request->input('feedback');
 
+        $feedback->save();
+
+        return view('welcome');
     }
 
     /**
@@ -93,7 +70,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        
+        //
     }
 
     /**
@@ -105,11 +82,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Order::where('id',$id)->update(['status'=>'delivered']);
-
-        Session::flash('message', 'Order is being delivered'); 
-
-        return back();
+        //
     }
 
     /**

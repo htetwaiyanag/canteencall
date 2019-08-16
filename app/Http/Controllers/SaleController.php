@@ -20,7 +20,7 @@ class SaleController extends Controller
 
         $date = Carbon::today()->subDays(7);
 
-        $sales = Order::where('user_id',$id)->where('status','delivered')->where('created_at', '>=', $date)->get();
+        $sales = Order::where('user_id',$id)->where('status','delivered')->where('created_at', '>=', $date)->paginate(10);
 
         // dd($sales);
         if(count($sales)>0)

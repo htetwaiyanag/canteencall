@@ -2,42 +2,57 @@
 
 @section('content')
 
-<div class="dropdown">
+<div class="container">
 
-  <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Sort By
-  </button>
+  <div class="row">
 
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="{{ route('menu.index') }}">Alphabet</a>
-    <a class="dropdown-item" href="{{ route('menu.index','orderBy=price') }}">Price</a>
-    <a class="dropdown-item" href="{{ route('menu.index','orderBy=order_count') }}">Most Ordered</a>
+    <div class="col-md-12">
+
+          <a href="{{ route('menu.create') }}" class="btn btn-custom float-right">Add Menu</a>
+
+          <form action="menu" class="mt-5">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search menu" name="search">
+                  <div class="input-group-append">
+                    <button class="btn btn-secondary" type="submit">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+            </form>
+
+          <div class="dropdown mt-5">
+
+            <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Sort By
+            </a>
+          
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="{{ route('menu.index') }}">Alphabet</a>
+              <a class="dropdown-item" href="{{ route('menu.index','orderBy=price') }}">Price</a>
+              <a class="dropdown-item" href="{{ route('menu.index','orderBy=order_count') }}">Most Ordered</a>
+            </div>
+          
+          </div>
+          @foreach ($menus as $menu)
+            <hr>
+
+            <img src="/uploads/menu/{{ $menu->image }}" alt="{{ $menu->food_name }} image" width="120" height="80" class="float-right">
+            <h2><a href="menu/{{ $menu->id }}">{{ $menu->food_name }}</a></h2>
+
+            <p>{{ $menu->price }}-ks<br>Optional taste : {{ $menu->optional_taste }}
+              <br>Waiting time : {{ $menu->waiting_time }}<br>{{ $menu->delivery_fees }} delivery<br>Order count : {{ $menu->order_count }}</p>
+            
+            <hr>
+
+          @endforeach
+
+        {{ $menus->links() }}
+
+    </div>
+
   </div>
 
 </div>
-<div class="col-md-8">
-
-  <a href="{{ route('menu.create') }}" class="btn btn-primary">Add Menu</a>
-
-  <form action="menu">
-    <input type="text" placeholder="food name" name="search"><input type="submit" class="btn btn-success btn-sm" value="Search">
-  </form>
-
-  @foreach ($menus as $menu)
-
-    <p><a href="menu/{{ $menu->id }}">{{ $menu->food_name }}</a></p>
-
-    {{ $menu->price }} <b><i>{{ $menu->category }}</i></b>
-
-    <img src="/uploads/menu/{{ $menu->image }}" alt="{{ $menu->food_name }} image" width="100" height="70">
-    <br>
-    Order count : {{ $menu->order_count }}
-    <hr>
-
-  @endforeach
-
-</div>
-
-{{ $menus->links() }}
 
 @endsection

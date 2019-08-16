@@ -65,7 +65,7 @@
               </div>
 
               <div class="form-group">
-                <input type="submit" value="Add Menu" class="btn btn-primary">
+                <input type="submit" value="Add Menu" class="btn btn-custom">
               </div>
               
             </form>

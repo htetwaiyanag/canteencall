@@ -21,7 +21,6 @@ class MenuController extends Controller
     {
         $userId = auth()->user()->id;
         if($request->search){
-
             $search = $request->search;
 
             $menus = Menu::where('food_name','LIKE',"%{$search}%")->paginate(10);

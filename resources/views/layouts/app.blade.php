@@ -94,7 +94,7 @@
                       <li class="nav-item"><a href="{{ route('menu.index') }}" class="nav-link"><i class="fas fa-utensils icon"></i><span class="text">Menu</span></a></li>
                       <li class="nav-item"><a href="{{ route('sale') }}" class="nav-link"><i class="fas fa-coins icon"></i><span class="text">Sales</span></a></li>
                       <li class="nav-item"><a href="{{ route('feedback.index') }}" class="nav-link"><i class="far fa-comment icon"></i><span class="text">Fedback</span></a></li>
-                      <li class="nav-item"><a href="#" class="nav-link"><i class="far fa-user icon"></i><span class="text">Preference</span></a></li>
+                      <li class="nav-item"><a href="/user/{{ auth()->user()->id }}/edit" class="nav-link"><i class="far fa-user icon"></i><span class="text">Edit Profile</span></a></li>
                       <li class="nav-item"><a href="#" class="sideMenuToggler">resize</a></li>
                     </div>
                   </div>

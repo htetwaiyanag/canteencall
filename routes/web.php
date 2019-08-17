@@ -39,4 +39,5 @@ Route::get('/sale','SaleController@index')->name('sale');
 
 Route::resource('/feedback','FeedbackController');
 
+Route::resource('/user', 'UserController');
 

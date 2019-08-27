@@ -18,6 +18,7 @@ class CartController extends Controller
     public function viewIndex($id)
     {
         $canteenId = $id;
+        // dd(Cart::get(1));
         $carts = Cart::getContent();
 
         return view('cart.index')->with('carts',$carts)->with('canteenId',$canteenId);
@@ -48,6 +49,15 @@ class CartController extends Controller
             $items[] = $item;
         });
 
+        foreach($items as $item)
+        {
+            $menu = Menu::where('id',$item->id)->increment('order_count');
+        }
+
+        
+
+        // dd(1);    
+
         $order = new Order();
         $order->customer_name = $request->input('customer_name');
         $order->customer_phone = $request->input('customer_phone');
@@ -57,6 +67,7 @@ class CartController extends Controller
         $order->status = 'making';
         $order->user_id = $request->input('user_id');
         $order->order_data = json_encode($items);
+        $order->order_count = 1;
 
         $order->save();
 

@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('time');
             $table->string('remark')->nullable();
             $table->text('order_data');
+            $table->integer('order_count');
             $table->timestamps();
         });
     }

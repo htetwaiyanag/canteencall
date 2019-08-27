@@ -18,11 +18,43 @@ class SaleController extends Controller
     {
         $id = auth()->user()->id;
 
-        $date = Carbon::today()->subDays(7);
+        $last7Day = Carbon::today()->subDays(7);
 
-        $sales = Order::where('user_id',$id)->where('status','delivered')->where('created_at', '>=', $date)->paginate(10);
+        $today = Carbon::today();
 
-        // dd($sales);
+        $sales = Order::where('user_id',$id)->where('status','delivered')->where('created_at', '>=', $last7Day)->get();
+
+        $todaySales = Order::where('user_id',$id)->where('status','delivered')->whereDate('created_at',Carbon::today())->get();
+
+        $customers = Order::groupBy('customer_name')->groupBy('customer_phone')->selectRaw('sum(order_count) as sum,customer_name,customer_phone')->pluck('sum','customer_name','customer_phone');
+
+        // dd($customers);
+
+        if(count($todaySales)>0)
+        {
+            foreach($todaySales as $todaySale){
+
+                $todaySaleData[] = json_decode($todaySale->order_data);
+
+            }
+
+            foreach($todaySaleData as $data)
+            {
+                foreach($data as $price)
+                {
+                    $todaySaleTotal[] = $price->price;
+                }
+            }
+
+            $todayTotal = array_sum($todaySaleTotal);
+
+        }
+        else{
+
+            Session::flash('message', 'This is no sale yet!'); 
+
+        }
+
         if(count($sales)>0)
         {
             foreach($sales as $sale){
@@ -41,7 +73,17 @@ class SaleController extends Controller
 
             $total = array_sum($saleTotal);
 
-            return view('sale.index')->with('sales',$sales)->with('saleData',$saleData)->with('total',$total);
+
+            return view('sale.index')->with([
+                'sales' => $sales,
+                'saleData' => $saleData,
+                'total' => $total,
+                'todaySales' => $todaySales,
+                'todaySaleData' => $todaySaleData,
+                'todayTotal' => $todayTotal,
+                'customers' => $customers
+
+            ]);
 
         }else{
 

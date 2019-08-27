@@ -36,7 +36,7 @@
                     <form action="/cart/{{ $cart->id }}" method="POST">
                       @method('PUT')
                       @csrf
-                      <input type="number" name="quantity" value="{{ $cart->quantity }}" class="form-control">
+                      <input type="number" name="quantity" value="{{ $cart->quantity }}" class="form-control" min="1">
                       <button type="submit" class="btn btn-sm"><i class="fas fa-redo-alt"></i></button>
                     </form>
                   </td>

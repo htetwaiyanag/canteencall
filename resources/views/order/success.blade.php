@@ -45,7 +45,7 @@
           </div>
 
           
-          <input type="hiden" name="user_id" value="{{ $userId }}">
+          <input type="hidden" name="user_id" value="{{ $userId }}">
           
           <div class="form-group">
             <label>Feedback</label>

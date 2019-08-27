@@ -40,7 +40,7 @@ class OrderController extends Controller
 
             Session::flash('message', 'This is no order yet!'); 
 
-            return view('order.index');
+            return view('order.index')->with('orders',$orders);
         }
 
     }

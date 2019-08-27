@@ -12,7 +12,6 @@
                 <br><br>
     
                 <form action="/search/c">
-                    
                     <label>Search by university</label><br>
                     <select name="university" class="form-control" required>
                         <option value="" selected>Select</option>
